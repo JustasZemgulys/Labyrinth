@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://b5axifowru1yt"]
+
+[ext_resource type="Script" path="res://Entities/Key/key.gd" id="1_o6ker"]
+[ext_resource type="ArrayMesh" uid="uid://c3eswavh0586b" path="res://Assets/Models/key.obj" id="2_ottd2"]
+[ext_resource type="AudioStream" uid="uid://c4jftlt2wyhgn" path="res://Assets/Sounds/Ding.mp3" id="3_eyfoi"]
+[ext_resource type="AudioStream" uid="uid://c5vire1rq680e" path="res://Assets/Sounds/Shining.mp3" id="4_cpg7b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ft0ve"]
+albedo_color = Color(1, 1, 0.0509804, 1)
+metallic = 0.85
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rhllg"]
+radius = 1.0
+height = 4.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qb43s"]
+radius = 15.0
+
+[node name="Key" type="Node3D" groups=["Key"]]
+script = ExtResource("1_o6ker")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.03, 0, 0, 0, -0.03, 4.52987e-09, 0, -4.52987e-09, -0.03, 0, 2, 0)
+material_override = SubResource("StandardMaterial3D_ft0ve")
+mesh = ExtResource("2_ottd2")
+
+[node name="Ding" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_eyfoi")
+volume_db = -10.0
+
+[node name="Shining" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_cpg7b")
+volume_db = -10.0
+
+[node name="PickUpArea" type="Area3D" parent="."]
+collision_layer = 2
+priority = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUpArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CapsuleShape3D_rhllg")
+
+[node name="DetectionArea" type="Area3D" parent="."]
+collision_layer = 4
+priority = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+shape = SubResource("SphereShape3D_qb43s")
+
+[connection signal="body_entered" from="PickUpArea" to="." method="_on_pick_up_area_body_entered"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

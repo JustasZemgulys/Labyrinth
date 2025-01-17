@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cykm5ctpdkbni"]
+
+[ext_resource type="PackedScene" uid="uid://dc38w5vq6wu50" path="res://Entities/Player/player.tscn" id="1_h5unp"]
+[ext_resource type="PackedScene" uid="uid://clbquajdl1p48" path="res://Entities/Labyrinth/labyrinth.tscn" id="2_7deed"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_y1osd"]
+size = Vector2(100, 100)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_dxgrx"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.617296, 0.786731, 0, -0.786731, 0.617296, 0, 13.8642, 9.90934)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0730989, 0.997325, 0, -0.997325, 0.0730989, 0, 84.0922, 107.966)
+
+[node name="Ground" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_y1osd")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_dxgrx")
+
+[node name="Player" parent="." instance=ExtResource("1_h5unp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 50)
+sensitivity = 250
+
+[node name="Labyrinth" parent="." instance=ExtResource("2_7deed")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20, 0, 20)
+scale_factor = 5.0

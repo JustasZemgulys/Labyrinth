@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt4658wbbsg70"]
+
+[ext_resource type="Script" path="res://Entities/Wall/wall.gd" id="1_s05i7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fyokv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_22tp4"]
+material = SubResource("StandardMaterial3D_fyokv")
+size = Vector3(5, 2, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7kc2u"]
+size = Vector3(5, 4, 0.2)
+
+[node name="Wall" type="Node3D"]
+script = ExtResource("1_s05i7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_22tp4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00047, 0)
+shape = SubResource("BoxShape3D_7kc2u")

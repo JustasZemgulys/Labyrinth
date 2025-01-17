@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dc38w5vq6wu50"]
+
+[ext_resource type="Script" path="res://Entities/Player/player.gd" id="1_jkdup"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2r1hn"]
+radius = 0.45
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yhhce"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y80w6"]
+albedo_color = Color(0.196078, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ae8vp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rk85j"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+collision_mask = 7
+script = ExtResource("1_jkdup")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_2r1hn")
+
+[node name="CharecterModel" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="CharecterModel"]
+mesh = SubResource("CapsuleMesh_yhhce")
+surface_material_override/0 = SubResource("StandardMaterial3D_y80w6")
+
+[node name="Visor" type="MeshInstance3D" parent="CharecterModel"]
+transform = Transform3D(0.351882, 0, 0, 0, 0.481138, 0, 0, 0, 0.79945, 0.0112603, 0.763996, -0.295547)
+mesh = SubResource("BoxMesh_ae8vp")
+surface_material_override/0 = SubResource("StandardMaterial3D_rk85j")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(0.999969, -0.00194516, 0.00768158, 0.000329157, 0.978762, 0.204998, -0.0079172, -0.204989, 0.978732, 0, 5.3343, 1.46978)
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraPivot/Camera3D"]
+transform = Transform3D(0.999969, 0.00239833, -0.00755238, -0.00194516, 0.99823, 0.0594484, 0.00768158, -0.0594319, 0.998203, 0.333408, 0.167649, 1.14952)
+light_energy = 10.0
+spot_range = 30.0
+spot_attenuation = 0.68302
+spot_angle = 20.0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

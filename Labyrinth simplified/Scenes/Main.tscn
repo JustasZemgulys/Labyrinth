@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://cykm5ctpdkbni"]
+
+[ext_resource type="PackedScene" uid="uid://clbquajdl1p48" path="res://Entities/Labyrinth/labyrinth.tscn" id="2_7deed"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rol3l"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_y1osd"]
+material = SubResource("StandardMaterial3D_rol3l")
+size = Vector2(500, 500)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_dxgrx"]
+
+[sub_resource type="Environment" id="Environment_v016j"]
+background_mode = 1
+ambient_light_color = Color(0.281187, 0.281187, 0.281187, 1)
+ambient_light_energy = 0.01
+
+[node name="Main" type="Node3D"]
+
+[node name="Ground" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_y1osd")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_dxgrx")
+
+[node name="Labyrinth" parent="." instance=ExtResource("2_7deed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0828781, 0, -0.00922012)
+scale_factor = 9.9
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Labyrinth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 100)
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_v016j")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 50, 250, 50)
+light_energy = 150.0
+shadow_enabled = true
+shadow_reverse_cull_face = true
+spot_range = 300.0
+spot_angle = 30.0

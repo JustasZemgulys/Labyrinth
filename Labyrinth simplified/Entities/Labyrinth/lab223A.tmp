@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://clbquajdl1p48"]
+
+[ext_resource type="Script" path="res://Labyrinth.gd" id="1_26lwj"]
+[ext_resource type="PackedScene" uid="uid://bt4658wbbsg70" path="res://Entities/Wall/wall.tscn" id="2_upifa"]
+
+[node name="Labyrinth" type="Node3D"]
+script = ExtResource("1_26lwj")
+height = null
+width = null
+erase_fraction = null
+
+[node name="Wall" parent="." instance=ExtResource("2_upifa")]
+visible = false
