@@ -36,13 +36,13 @@ func _add_enlarged_collision_area():
 	var enlarged_area = Area3D.new()
 	var enlarged_collision_shape = CollisionShape3D.new()
 	var new_shape = BoxShape3D.new()
-	new_shape.extents = Vector3(8, 20, -5.5)  # Dimensions of the collision box
+	new_shape.extents = Vector3(5, 20, 0.6)  # Dimensions of the collision box
 	enlarged_collision_shape.shape = new_shape
 	enlarged_area.add_child(enlarged_collision_shape)
 	add_child(enlarged_area)
 
 	# Position and connect the new collision shape
-	enlarged_area.transform.origin = Vector3(0, 0, 0)  # Adjust as needed
+	enlarged_area.transform.origin = Vector3(0, 0, 0)
 	enlarged_area.connect("body_entered", Callable(self, "_on_body_entered"))
 	enlarged_area.connect("body_exited", Callable(self, "_on_body_exited"))
 

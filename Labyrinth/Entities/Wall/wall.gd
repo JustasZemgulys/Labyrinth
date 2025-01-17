@@ -27,8 +27,8 @@ func _set_wall_material():
 	var material = $MeshInstance3D.get_active_material(0)
 	if material:
 		var unique_material = material.duplicate()
-		unique_material.albedo_color = Color(1, 0, 0)#red
-		#unique_material.albedo_color = Color(0.5, 0.5, 0.5)
+		#unique_material.albedo_color = Color(1, 0, 0)#red
+		unique_material.albedo_color = Color(0.5, 0.5, 0.5)
 		$MeshInstance3D.set_surface_override_material(0, unique_material)
 
 func _add_enlarged_collision_area():
@@ -36,13 +36,13 @@ func _add_enlarged_collision_area():
 	var enlarged_area = Area3D.new()
 	var enlarged_collision_shape = CollisionShape3D.new()
 	var new_shape = BoxShape3D.new()
-	new_shape.extents = Vector3(5, 10, 0.4)  # Dimensions of the collision box
+	new_shape.extents = Vector3(5, 20, 0.6)  # Dimensions of the collision box
 	enlarged_collision_shape.shape = new_shape
 	enlarged_area.add_child(enlarged_collision_shape)
 	add_child(enlarged_area)
 
 	# Position and connect the new collision shape
-	enlarged_area.transform.origin = Vector3(0, 5, 0.3)  # Adjust as needed
+	enlarged_area.transform.origin = Vector3(0, 0, 0)
 	enlarged_area.connect("body_entered", Callable(self, "_on_body_entered"))
 	enlarged_area.connect("body_exited", Callable(self, "_on_body_exited"))
 

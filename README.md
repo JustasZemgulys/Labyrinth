@@ -1,4 +1,4 @@
-# Godot labyrinth Generation System
+# Godot Labyrinth Generation System
 
 ## Overview
 This project implements a labyrinth generation system in Godot. It demonstrates the following features:

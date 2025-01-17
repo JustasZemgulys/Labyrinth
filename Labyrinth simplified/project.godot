@@ -10,6 +10,6 @@ config_version=5
 
 [application]
 
-config/name="Praktika supaprastinta"
+config/name="Labyrinth simplified"
 run/main_scene="res://Menus/Main menu/Menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
